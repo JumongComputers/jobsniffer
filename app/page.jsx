@@ -2,6 +2,7 @@
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import { useState } from "react";
+import { signIn } from 'next-auth/react';
 
 export default function Home() {
   const [authScreen, setAuthScreen] = useState(true);
