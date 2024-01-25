@@ -24,7 +24,6 @@ const Register = () => {
       redirect: false,
       email: data.email,
       password: data.password,
-      age: data.age,
       name: data.name
     });
 
