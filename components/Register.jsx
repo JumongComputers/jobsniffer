@@ -3,9 +3,12 @@ import InputComponent from "./InputComponent";
 import Button from "./Button";
 import { inputValidators } from "@/utils/formValidation";
 import { useForm } from "react-hook-form";
-import { signIn } from 'next-auth/react';
+import { signUp } from "@/app/auth/auth";
+import { useRouter } from "next/router";
+// import { signIn } from 'next-auth/react';
 
 const Register = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,17 +22,19 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    // Use the `signIn` function with the 'credentials' provider for sign-up
-    const result = await signIn('credentials', {
-      redirect: false,
+    // Use the `signUp` function with the 'credentials' provider for sign-up
+    const result = await signUp('credentials', {
+      // redirect: false,
       email: data.email,
       password: data.password,
-      name: data.name
+      name: data.fullName
     });
 
     // Handle the result as needed (e.g., check for errors)
     if (result?.error) {
       console.error('Sign-up error:', result.error);
+    } else {
+      router.push("/auth/signin");
     }
   };
 

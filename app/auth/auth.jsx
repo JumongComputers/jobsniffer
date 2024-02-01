@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function signUp({ email, password }) {
+export async function signUp({ email, password, name }) {
   try {
     // Check if the user already exists
     const existingUser = await prisma.user.findUnique({
@@ -18,7 +18,8 @@ export async function signUp({ email, password }) {
     const newUser = await prisma.user.create({
       data: {
         email,
-        password, // In a real-world scenario, you'd hash the password before saving it.
+        password,
+        name // In a real-world scenario, you'd hash the password before saving it.
       },
     });
 
